@@ -4,26 +4,19 @@ import tensorflow as tf
 import numpy as np
 import os
 import cv2
-import requests
+import gdown
 
 app = Flask(__name__)
 
-# Load the model using H5 format
+
+MODEL_URL = "https://drive.google.com/uc?id=154aOnfcvEA47Um-RLXprFNal3g-QvVEh"
 MODEL_PATH = "trained_model.h5"
-GOOGLE_DRIVE_FILE_ID = "YOUR_FILE_ID_HERE"
 
-# Function to download model from Google Drive
 def download_model():
-    url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}"
-    response = requests.get(url)
-    with open(MODEL_PATH, "wb") as file:
-        file.write(response.content)
+    if not os.path.exists(MODEL_PATH):
+        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
 
-# Download model if not present
-if not os.path.exists(MODEL_PATH):
-    print("Downloading model...")
-    download_model()
-
+download_model()
 # Load the model
 model = keras.models.load_model(MODEL_PATH)
 
