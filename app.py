@@ -8,9 +8,8 @@ import gdown
 
 app = Flask(__name__)
 
-
 MODEL_URL = "https://drive.google.com/uc?id=154aOnfcvEA47Um-RLXprFNal3g-QvVEh"
-MODEL_PATH = "trained_model.h5"
+MODEL_PATH = "/opt/render/persistent/trained_model.h5"
 
 def download_model():
     if not os.path.exists(MODEL_PATH):
@@ -27,6 +26,11 @@ def preprocess_image(image_path):
     input_arr = tf.keras.utils.img_to_array(image)
     input_arr = np.array([input_arr])  # Convert single image to batch
     return input_arr
+
+# Define home route
+@app.route('/')
+def home():
+    return "Welcome to the Plant Disease Detection API! Use the /predict endpoint to classify plant diseases."
 
 # Define route for predictions
 @app.route('/predict', methods=['POST'])
