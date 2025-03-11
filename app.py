@@ -12,6 +12,7 @@ MODEL_URL = "https://drive.google.com/uc?id=154aOnfcvEA47Um-RLXprFNal3g-QvVEh"
 MODEL_PATH = "/opt/render/persistent/trained_model.h5"
 
 def download_model():
+    os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)  # Ensure directory exists
     if not os.path.exists(MODEL_PATH):
         gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
 
