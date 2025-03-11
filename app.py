@@ -4,7 +4,7 @@ import tensorflow as tf
 import numpy as np
 import os
 import cv2
-import gdown
+# import gdown
 
 app = Flask(__name__)
 
