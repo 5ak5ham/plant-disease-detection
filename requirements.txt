@@ -4,3 +4,4 @@ numpy
 opencv-python
 gunicorn
 gdown
+pillow
